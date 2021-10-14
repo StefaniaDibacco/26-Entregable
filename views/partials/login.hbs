@@ -3,7 +3,8 @@
     <br />
     <div class='alert alert-success alertaLogout' role='alert'>
       <h2>Bienvenido {{this.nombre}}!</h2>
-      <form action='/logout' method='POST' autocomplete='off'>
+      <h6>Esta es tu conexión Nº {{this.contador}}</h6>
+      <form action='/api/logout' method='POST' autocomplete='off'>
         <button
           class='btn btn-warning'
           id='destroy'
@@ -11,44 +12,130 @@
         >Logout</button>
       </form>
     </div>
-  {{else}}
-    <h3>Login de Usuario</h3>
-    {{#if isDestroyed}}
-      <br />
-      <div class='alert alert-info alertaLogout' role='alert'>
-        <h3>Adios {{this.nombre}}!</h3>
-      </div>
-    {{/if}}
-    {{#if isTimedOut}}
-      <br />
-      <div class='alert alert-success alertaLogout' role='alert'>
-        <h2>Session TimeOut</h2>
-        <form action='/logout' method='POST' autocomplete='off'>
-          <button
-            class='btn btn-warning'
-            id='destroy'
-            name='destroy'
-          >Logout</button>
-        </form>
-      </div>
-    {{/if}}
-    <form action='/login' method='POST' autocomplete='off'>
-      <label>Ingrese su nombre</label>
+  {{/if}}
+  {{#if isDestroyed}}
+    <br />
+    <div class='alert alert-info alertaLogout' role='alert'>
+      <h3>Adios {{this.nombre}}!</h3>
+    </div>
+  {{/if}}
+  {{#if isTimedOut}}
+    <br />
+    <div class='alert alert-success alertaLogout' role='alert'>
+      <h2>Session TimeOut</h2>
+      <form action='/api/logout' method='POST' autocomplete='off'>
+        <button
+          class='btn btn-warning'
+          id='destroy'
+          name='destroy'
+        >Logout</button>
+      </form>
+    </div>
+  {{/if}}
+  {{#if signUp}}
+    <h3>Registro de Usuario</h3>
+    <form action='/api/signup' method='POST' autocomplete='off'>
       <div class='form-group myForm'>
         <input
           type='text'
           class='form-control'
-          id='nombre'
-          name='nombre'
+          id='username'
+          name='username'
+          placeholder='Nombre de Usuario'
+          required
+        />
+        <input
+          type='text'
+          class='form-control'
+          id='password'
+          name='password'
+          placeholder='Contraseña'
+          required
+        />
+        <input
+          type='text'
+          class='form-control'
+          id='email'
+          name='email'
+          placeholder='E-mail'
+          required
+        />
+        <input
+          type='text'
+          class='form-control'
+          id='firstName'
+          name='firstName'
+          placeholder='Nombre'
+          required
+        />
+        <input
+          type='text'
+          class='form-control'
+          id='lastName'
+          name='lastName'
+          placeholder='Apellido'
           required
         />
       </div>
       <div class='formButton'>
         <button
-          class='btn btn-success'
+          class='btn btn-primary'
           style='align-content: flex-end;'
         >Enviar</button>
       </div>
+    </form>
+  {{/if}}
+  {{#if signUpOK}}
+    <br />
+    <div class='alert alert-success alertaLogout' role='alert'>
+      <h2>Registro exitoso!</h2>
+    </div>
+  {{/if}}
+  {{#if signUpError}}
+    <br />
+    <div class='alert alert-danger alertaLogout' role='alert'>
+      <h2>Error de registro</h2>
+    </div>
+  {{/if}}
+  {{#if loginError}}
+    <br />
+    <div class='alert alert-danger alertaLogout' role='alert'>
+      <h2>Error de Login</h2>
+    </div>
+  {{/if}}
+  {{#if notLogged}}
+    <h3>Login de Usuario</h3>
+    <form action='/api/login' method='POST' autocomplete='off'>
+      <div class='form-group myForm'>
+        <input
+          type='text'
+          class='form-control'
+          id='username'
+          name='username'
+          placeholder='Nombre'
+          required
+        />
+        <input
+          type='password'
+          class='form-control'
+          id='password'
+          name='password'
+          placeholder='Contraseña'
+          required
+        />
+      </div>
+      <div class='formButton'>
+        <button
+          class='btn btn-primary'
+          style='align-content: flex-end;'
+        >Enviar</button>
+      </div>
+    </form>
+    <form action='/api/presignup' method='POST' autocomplete='off'>
+      <button
+        class='btn btn-success'
+        style='align-content: flex-end;'
+      >Registrarse</button>
     </form>
   {{/if}}
 </div>
