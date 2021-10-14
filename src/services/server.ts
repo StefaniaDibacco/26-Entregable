@@ -1,7 +1,7 @@
 import express from 'express';
 import handlebars from 'express-handlebars';
 import * as http from 'http';
-import routerProductos from '../routes/productos';
+import router from '../routes/index';
 import path from 'path';
 import cookieParser from 'cookie-parser';
 import session from 'express-session';
@@ -35,7 +35,7 @@ app.engine(
   })
 );
 
-app.use('/api/productos', routerProductos);
+app.use('/api/', router);
 
 const StoreOptions = {
   store: MongoStore.create({
